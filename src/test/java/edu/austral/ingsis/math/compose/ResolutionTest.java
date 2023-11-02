@@ -1,5 +1,8 @@
 package edu.austral.ingsis.math.compose;
 
+import edu.austral.ingsis.math.composite.*;
+import edu.austral.ingsis.math.composite.Module;
+
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -13,7 +16,8 @@ public class ResolutionTest {
      */
     @Test
     public void shouldResolveSimpleFunction1() {
-        final Double result = 7d;
+        Function func = new Sum(new Literal(1), new Literal(6));
+        final Double result = func.resolution();
 
         assertThat(result, equalTo(7d));
     }
@@ -23,7 +27,8 @@ public class ResolutionTest {
      */
     @Test
     public void shouldResolveSimpleFunction2() {
-        final Double result = 6d;
+        Function func = new Division(new Literal(12), new Literal(2));
+        final Double result = func.resolution();
 
         assertThat(result, equalTo(6d));
     }
@@ -33,7 +38,9 @@ public class ResolutionTest {
      */
     @Test
     public void shouldResolveSimpleFunction3() {
-        final Double result = 13.5;
+        Function func_1 = new Division(new Literal(9), new Literal(2));
+        Function func_2 = new Multiplication(func_1, new Literal(3));
+        final Double result = func_2.resolution();
 
         assertThat(result, equalTo(13.5d));
     }
@@ -43,7 +50,9 @@ public class ResolutionTest {
      */
     @Test
     public void shouldResolveSimpleFunction4() {
-        final Double result = 20.25;
+        Function func_1 = new Division(new Literal(27), new Literal(6));
+        Function func_2 = new Power(func_1, new Literal(2));
+        final Double result = func_2.resolution();
 
         assertThat(result, equalTo(20.25d));
     }
@@ -53,7 +62,8 @@ public class ResolutionTest {
      */
     @Test
     public void shouldResolveSimpleFunction5() {
-        final Double result = 6d;
+        Function func_1 = new Power(new Literal(36), new Division(new Literal(1), new Literal(2)));
+        final Double result = func_1.resolution();
 
         assertThat(result, equalTo(6d));
     }
@@ -63,7 +73,8 @@ public class ResolutionTest {
      */
     @Test
     public void shouldResolveSimpleFunction6() {
-        final Double result = 136d;
+        Function func = new Module(new Literal(136));
+        final Double result = func.resolution();
 
         assertThat(result, equalTo(136d));
     }
@@ -73,7 +84,8 @@ public class ResolutionTest {
      */
     @Test
     public void shouldResolveSimpleFunction7() {
-        final Double result = 136d;
+        Function func = new Module(new Literal(-136));
+        final Double result = func.resolution();
 
         assertThat(result, equalTo(136d));
     }
@@ -83,7 +95,9 @@ public class ResolutionTest {
      */
     @Test
     public void shouldResolveSimpleFunction8() {
-        final Double result = 0d;
+        Function func_1 = new Substract(new Literal(5), new Literal(5));
+        Function func_2 = new Multiplication(func_1, new Literal(8));
+        final Double result = func_2.resolution();
 
         assertThat(result, equalTo(0d));
     }

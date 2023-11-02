@@ -1,4 +1,6 @@
 package edu.austral.ingsis.math.compose;
+import edu.austral.ingsis.math.composite.*;
+import edu.austral.ingsis.math.composite.Module;
 
 import org.junit.Test;
 
@@ -13,7 +15,8 @@ public class ResolutionWithVariablesTest {
      */
     @Test
     public void shouldResolveFunction1() {
-        final Double result = 4d;
+        Function func = new Sum(new Literal(1), new Variable("x",3));
+        final Double result = func.resolution();
 
         assertThat(result, equalTo(4d));
     }
@@ -23,7 +26,8 @@ public class ResolutionWithVariablesTest {
      */
     @Test
     public void shouldResolveFunction2() {
-        final Double result = 3d;
+        Function func = new Division(new Literal(12), new Variable("div", 4));
+        final Double result = func.resolution();
 
         assertThat(result, equalTo(3d));
     }
@@ -33,7 +37,9 @@ public class ResolutionWithVariablesTest {
      */
     @Test
     public void shouldResolveFunction3() {
-        final Double result = 12d;
+        Function func_1 = new Division(new Literal(9), new Variable("x", 3));
+        Function func_2 = new Multiplication(func_1, new Variable("y", 4));
+        final Double result = func_2.resolution();
 
         assertThat(result, equalTo(12d));
     }
@@ -43,7 +49,9 @@ public class ResolutionWithVariablesTest {
      */
     @Test
     public void shouldResolveFunction4() {
-        final Double result = 27d;
+        Function func_1 = new Division(new Literal(27), new Variable("a", 9));
+        Function func_2 = new Power(func_1, new Variable("b", 3));
+        final Double result = func_2.resolution();
 
         assertThat(result, equalTo(27d));
     }
@@ -53,7 +61,8 @@ public class ResolutionWithVariablesTest {
      */
     @Test
     public void shouldResolveFunction5() {
-        final Double result = 6d;
+        Function func = new Power(new Variable("z", 36), new Literal(0.5));
+        final Double result = func.resolution();
 
         assertThat(result, equalTo(6d));
     }
@@ -63,7 +72,9 @@ public class ResolutionWithVariablesTest {
      */
     @Test
     public void shouldResolveFunction6() {
-        final Double result = 0d;
+        Function func_1 = new Module(new Variable("value", 8));
+        Function func_2 = new Substract(func_1, new Literal(8));
+        final Double result = func_2.resolution();
 
         assertThat(result, equalTo(0d));
     }
@@ -73,7 +84,9 @@ public class ResolutionWithVariablesTest {
      */
     @Test
     public void shouldResolveFunction7() {
-        final Double result = 0d;
+        Function func_1 = new Module(new Variable("value", 8));
+        Function func_2 = new Substract(func_1, new Literal(8));
+        final Double result = func_2.resolution();
 
         assertThat(result, equalTo(0d));
     }
@@ -83,7 +96,9 @@ public class ResolutionWithVariablesTest {
      */
     @Test
     public void shouldResolveFunction8() {
-        final Double result = 24d;
+        Function func_1 = new Substract(new Literal(5), new Variable("i", 2));
+        Function func_2 = new Multiplication(func_1, new Literal(8));
+        final Double result = func_2.resolution();
 
         assertThat(result, equalTo(24d));
     }

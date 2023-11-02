@@ -15,6 +15,7 @@ public class Literal implements Function{
 
     @Override
     public String print() {
+        if(value == (int) value) return Integer.toString((int) value);
         return Double.toString(value);
     }
 
